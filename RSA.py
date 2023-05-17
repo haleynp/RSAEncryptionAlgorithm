@@ -41,7 +41,7 @@ def rsa_setup(p,q):
     n,e,d = 0, 0, 0
     n = p*q
     gcd = 0
-    totient = (p-1)(q-1)
+    totient = (p-1)*(q-1)
     e = 0
     for i in range(3, totient):
         gcd = math.gcd(i,totient)
@@ -71,7 +71,7 @@ for i in range(trials):
     p , q = random.sample(primes, 2)
     n, e, d = rsa_setup(p,q)
     print(p,q,n,e,d)
-    message = random.randin(0, n-1)
+    message = random.randint(0, n-1)
     en = encrypt(n, e, message)
     if message != decrypt(n, d, en):
         print("Error for p={0} q={1}".format(p,q))
