@@ -6,20 +6,15 @@ import math
 def mod_power(a, b, n):
     #Function that returns a**b (mod n) where a, b, n are integers
     #Returns the remainder when a**b is divided by n
-    #Implementation done mathematically without using pow()
-    powers_of_two = [1] 
-    mods_of_two = [a % n]
-    if mods_of_two[0] == 0:
-        return 0
-    answer = 1
-    while powers_of_two[~0] < b:
-        powers_of_two.append(powers_of_two[~0] * 2)
-        mods_of_two.append(mods_of_two[~0]**2 % n)
-    for i in range(len(powers_of_two)):
-        if b >= powers_of_two[~i]:
-            b -= powers_of_two[~i]
-            answer = (answer*mods_of_two[~i]) % n
-    return answer
+    #Implementation done without using pow() function as a challenge
+    r = 1
+    x = a%n
+    while b > 0:
+        if ((b%2) == 1):
+            r = (r*a)%n
+        b = b >>1
+        a = (a*a)%n
+    return r
 
 def bezout_solver(a,b,k):
     # given integers a, b, k return the integer solution to the equation: # a*x + b*y = k
