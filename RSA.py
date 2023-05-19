@@ -1,11 +1,12 @@
 import random
 import math
 
-#Function to return a**b (mod n) where a, b, n are integers
-#Returns the remainder when a**b is divided by n
-#Implementation done mathematically without using pow()
+
 
 def mod_power(a, b, n):
+    #Function that returns a**b (mod n) where a, b, n are integers
+    #Returns the remainder when a**b is divided by n
+    #Implementation done mathematically without using pow()
     powers_of_two = [1] 
     mods_of_two = [a % n]
     if mods_of_two[0] == 0:
@@ -34,11 +35,10 @@ def bezout_solver(a,b,k):
         s = l%s
         l = gcd
 
-
     # check if gcd divdes k, if it does, run Bezout's algorithm
     if(k%gcd != 0 ):
         return None ,None , gcd 
-    else:
+    else: #Bezout Algorithm
         x = 0; x0 = 1
         y = 1; y0 = 0
         r = min(a,b); r0 = max(a,b)
@@ -47,6 +47,7 @@ def bezout_solver(a,b,k):
             r0, r = r, r0 - quo*r
             y0, y = y, y0 - quo*y
             x0, x = x, x0 - quo*x
+
     c = k//gcd 
 
     #The lines below assign the variables to the correct values based on the values of a and b
