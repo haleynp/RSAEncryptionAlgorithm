@@ -26,10 +26,10 @@ def bezout_solver(a,b,k):
     # a*x + b*y = k
     # Return x, y, gcd(a,b) where these are all integers
     # if a solution does not exist, return None, None, gcd(a,b)
-    # dont use math.gcd()
     # First check if the gcd divides k
     # If not, return None, None, gcd(a,b)
     # gcd(a,b) find which is greater first, then do Euclidian alg until remain = 0
+    
     gcd = None
     l = max(a,b)
     s = min(a,b)
@@ -42,35 +42,14 @@ def bezout_solver(a,b,k):
     if(k%gcd != 0 ):
         return None ,None , gcd
     else:
-        #do algorithm
-        
-        #stop condition is k
-        '''r0 = a
-        r1 = b
-        x0 = 1
-        x1 = 0
-        y0 = 0
-        y1 = 1'''
-        
         x = 0; x0 = 1
         y = 1; y0 = 0
         r = min(a,b); r0 = max(a,b)
         while r != 0:
-            #print((max(a,b)*x) + (min(a,b)*y))
-            '''if((max(a,b)*x0) + (min(a,b)*y) == k):
-                if(a == max(a,b)):
-                    return x, y, gcd
-                    break
-                elif(b ==max(a,b)):
-                    return y, x, gcd
-                    break'''
             quo = r0//r
             r0, r = r, r0 - quo*r
             y0, y = y, y0 - quo*y
             x0, x = x, x0 - quo*x
-            
-            #print(x, y)
-            #print("check")
     c = k//gcd 
     if(a == max(a,b)):
         return c*x0, c*y0, gcd
