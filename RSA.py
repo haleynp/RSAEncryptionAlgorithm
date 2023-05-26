@@ -1,7 +1,30 @@
 import random
 import math
 
+def rsa_setup(p,q):
+    n, e, d = 0, 0, 0
+    n = p * q
+    gcd = 0
+    totient = (p-1) * (q-1)
+    e = 0
 
+    for i in range(3, totient):
+        gcd = math.gcd(i, totient)
+        if(gcd == 1):
+            e = i
+    
+    a, _, _ = bezout_solver(e,totient,1)
+    d = mod_power(a, 1, totient)
+
+    return n, e, d
+
+def encrypt(n, e, message):
+
+    return mod_power(message, e, n)
+
+def decrypt(n, d, encrypted_message):
+
+    return mod_power(encrypted_message, d, n)
 
 def mod_power(a, b, n):
     #Function that returns a**b (mod n) where a, b, n are integers
@@ -21,7 +44,8 @@ def bezout_solver(a,b,k):
     # return the greatest common divisor of a and b as well
     # if a solution does not exist, return None, None, gcd(a,b)
 
-    #Finding the gcd of a and b without using gcd() function
+
+    #Algorithm to find the gcd of a and b without using gcd() function
     gcd = None
     l = max(a,b) # From the values passed into the parameters a and b, assign the larger value to local variable l
     s = min(a,b) # From the values passed into the parameters a and b, assign the lesser value to local variable s
@@ -52,32 +76,6 @@ def bezout_solver(a,b,k):
         return c*y0, c*x0, gcd
     else: # in case a and b are equal
         return c*x0, c*y0, gcd
-
-
-def rsa_setup(p,q):
-    n, e, d = 0, 0, 0
-    n = p * q
-    gcd = 0
-    totient = (p-1) * (q-1)
-    e = 0
-
-    for i in range(3, totient):
-        gcd = math.gcd(i, totient)
-        if(gcd == 1):
-            e = i
-    
-    a, _, _ = bezout_solver(e,totient,1)
-    d = mod_power(a, 1, totient)
-
-    return n, e, d
-
-def encrypt(n, e, message):
-
-    return mod_power(message, e, n)
-
-def decrypt(n, d, encrypted_message):
-
-    return mod_power(encrypted_message, d, n)
 
 
 #Algorithm Testing Code
